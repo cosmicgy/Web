@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<!-- aside을 좌측정렬, section을 우측 정렬 -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /*직관적인 box model을 위해 box-sizing: border-box;을 사용*/
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            color: #58666e;
+            background-color: #f0f3f4;
+            -webkit-font-smoothing: antialiased;
+            -webkit-text-size-adjus: 100%;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        p {
+            margin: 10px 5px;
+        }
+
+        h1 {
+            font-size: 1.8em;
+        }
+
+        #wrap {
+            width: 100%;
+            /*contents 영역 상단이 header 영역과 겹치므로 contents 영역을 header의 height 만큼 아래로 내린다. */
+            margin-top: 60px;
+        }
+
+        header {
+            /*navigation bar를 화면 상단에 고정시키기
+            fixed 프로퍼티은 부모 요소와 관계없이 브라우저의 viewport를 기준으로 좌표 프로퍼티(top, bottom, left, right)을 사용하여 위치를 이동시킨다. 
+            스크롤이 되더라도 화면에서 사라지지 않고 항상 같은 곳에 위치할 수 있다.*/
+            position: fixed;
+            top: 0;
+            /*header 요소에 화면폭 만큼의 width와 고정 height를 지정/ background-color와 box-shadow 효과를 추가*/
+            width: 100%;
+            height: 60px;
+            z-index: 2000;
+            background-color: #fff;
+            box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            /*logo image를 포함하는 a tag(.logo)의 height를 logo image와 같은 height인 36px로 지정하고 상하 margin을 12px씩 부여하면 logo 요소의 높이는 60px이 되고 header의 height와 같아져 이미지는 수직 중앙 정렬이 됨
+            a tag는 inline 요소이므로 margin을 정의하기 위해서 display: inline-block;을 설정 */
+            display: inline-block;
+            height: 36px;
+            margin: 12px 0 12px 25px;
+        }
+
+        .logo>img {
+            height: 36px;
+        }
+
+        /*float 프로퍼티를 이용하여 Navigation bar를 우측정렬*/
+        nav {
+            float: right;
+        }
+
+        .nav-items {
+            margin-right: 20px;
+        }
+
+        .nav-items>li {
+            /*수직 정렬되어 있는 Navigation bar를 수평 정렬/ block 요소인 li에 display: inline-block;를 설정하여 inline 요소와 같이 가로로 정렬한다.*/
+            display: inline-block;
+
+        }
+
+        .nav-items>li>a {
+            /*수평 정렬된 Navigation bar 수직 중앙 정렬한다. line-height: 60px;으로 텍스트의 높이를 header의 height와 동일하게 60px로 고정시킨다. 텍스트 간 적당한 간격 유지를 위해 padding을 정의*/
+            line-height: 60px;
+            padding: 0 30px;
+            color: rgba(0, 0, 0, 0.4);
+        }
+
+        .nav-items>li>a:hover {
+            color: rgba(0, 0, 0, 0.8);
+        }
+
+
+        #content-wrap:after {
+            content: "";
+            display: block;
+            clear: both;
+            /*float 프로퍼티 요소를 감싸는 wrap 요소에 clearfix을 부여하여 float 프로퍼티가 선언된 두개의 자식 요소를 포함하는 부모 요소의 높이가 정상적인 값을 가지지 못하는 문제를 해결*/
+        }
+
+        aside {
+            /*aside 영역도 고정*/
+            position: fixed;
+            top: 60px;
+            bottom: 0;
+            width: 200px;
+
+            padding-top: 25px;
+            background-color: #333;
+        }
+
+
+        aside>ul {
+            width: 200px;
+        }
+
+        aside>ul>li>a {
+            display: block;
+            color: #fff;
+            padding: 10px 0 10px 20px;
+        }
+
+        aside>ul>li>a.active {
+            background-color: #4CAF50;
+        }
+
+        aside>ul>li>a:hover:not(.active) {
+            background-color: #555;
+        }
+
+        aside>h1 {
+            padding: 20px 0 20px 20px;
+            color: #fff;
+        }
+
+
+        section {
+            /*section 영역의 % width도 삭제하여 aside 영역 만큼 우측으로 밀어서 나머지 영역을 모두 차지하도록 한다.*/
+            float: right;
+            margin-left: 200px;
+        }
+
+        article {
+            margin: 10px;
+            padding: 25px;
+            background-color: white;
+        }
+
+
+        footer {
+
+            position: absolute;
+            height: 60px;
+            width: 100%;
+            padding: 0 25px;
+            line-height: 60px;
+            color: #8a8c8f;
+            border-top: 1px solid #dee5e7;
+            background-color: #f2f2f2;
+        }
+
+        footer {
+            /* footer를 aside위에 올리기 위해 사용(부유객체) */
+            position: absolute;
+            height: 60px;
+            width: 100%;
+            padding: 0 25px;
+            line-height: 60px;
+            color: #8a8c8f;
+            border-top: 1px solid #dee5e7;
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap">
+        <header>
+            <a class="logo" href="#home"><img src="https://poiemaweb.com/img/logo.png"></a>
+            <nav>
+                <ul class="nav-items">
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#news">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <div id="content-wrap">
+            <aside>
+                <h1>Aside</h1>
+                <ul>
+                    <li><a href="#" class="active">London</a></li>
+                    <li><a href="#">Paris</a></li>
+                    <li><a href="#">Tokyo</a></li>
+                    <li><a href="#">Newyork</a></li>
+                </ul>
+            </aside>
+            <section>
+                <article id="london">
+                    <h1>London</h1>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                </article>
+                <article id="paris">
+                    <h1>Paris</h1>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                </article>
+                <article id="tokyo">
+                    <h1>Tokyo</h1>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                </article>
+                <article id="newyork">
+                    <h1>Newyork</h1>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                    <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
+                        metropolitan area of over 13 million inhabitants.</p>
+                    <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
+                        going back to its founding by the Romans, who named it Londinium.</p>
+                </article>
+            </section>
+            <!-- end of content-wrap -->
+        </div>
+        <footer>© Copyright 2016 ungmo2</footer>
+        <!-- end of wrap   -->
+    </div>
+</body>
+
+</html>
