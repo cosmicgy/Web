@@ -376,9 +376,75 @@
       21-3) footer : content-wrap 영역 다음에 footer를 배치
       fixed 프로퍼티는 스크롤이 되어도 언제나 그자리를 고수하기 때문에 본문을 가리게 될 수 있다. ->  absolute 프로퍼티를 설정/ absolute를 사용하면 다른 요소가 먼저 위치를 점유하고 있어도 뒤로 밀리지 않고 덮어쓰게 됨
 
+    22. 반응형 레이아웃 : 화면 해상도에 따라 가로폭이나 배치를 변경하여 가독성을 높이는 것/ 하나의 웹사이트를 구축해 다양한 디바이스의 화면 해상도에 최적화된 웹사이트를 제공하는 것 
+      22-1) veiwport meta tage
+        - viewport란 웹페이지의 가시영역을 의미/ 디바이스마다 차이가 있음 ex) 모바일 브라우저는 주화면이 세로 화면이고 윈도우 resize가 불가하며 화면 터치를 사용하는 등 데스크탑 브라우저와 구성이나 형태가 다름
+      meta tag는 브라우저 혹은 검색엔진최적화를 위해 검색엔진에게 메타데이터를 전달하기 위해 사용/ viewport meta tag는 브라우저의 화면 설정과 관련된 정보를 제공함 
+      px단위 사용(단위 표현은 생략)/ 복수개의 프로퍼티를 사용할 때는 쉼표(,)로 구분
+      일반적으로 모바일 디바이스에서만 적용됨 
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> 가장 일반적인 viewport 설정/ 가로폭을 디바이스의 가로폭에 맞추고 초기 화면 배율을 100%로 설정하는 것을 의미
+      22-2) @media : 서로 다른 미디어 타입 print, screen… 에 따라 각각의 스타일을 지정하는 것을 가능하게 함./ 
+        Media Query : @media을 사용하여 미디어 별로 스타일을 지정하는 것/ 나중에 선언된 스타일이 우선 적용 -> Non Mobile First 방식의 경우 max-width의 값이 큰 것부터 기술해야함 
+        Mobile-first 방식은 해상도가 작은 순서로 Non Mobile-first 방식은 해상도가 큰 순서로 기술한다. 
+      22-3) Responsive Navigation Bar - Tablet  
+        데스크탑 layout에서 화면이 작아질 때 header navigation bar가 header 영역 아래로 내려오는 현상이 발생되는 것을 보안하기 위해 태블릿에서의 layout을 정의
+        -> viewport width가 800px 이하가 되면 header 영역을 2단(logo와 navigation bar영역)으로 구분하기 위하여 header 영역의 높이를 현재(60px)의 2배로 넓힌다. 그리고 logo image과 navigation bar를 centering한다.
+      22-4) Responsive Navigation Bar - Smartphone
+        태블릿 layout에서는 header 영역을 2단으로 분리하여 navigation bar는 header 하단 영역에 배치 하지만 스마트폰의 viewport width는 가로로 나란히 정렬되어 있는 navigation bar를 모두 담기에는 너무 좁음. -> 우측 navigation icon을 클릭하면 navigation bar가 수직 정렬되어 화면에 나타나도록 navigation icon에 animation 효과를 부여한다.
+      22-5) Section & Aside & Footer
+        article을 2열로 배치하기 위해서 width 값을 지정해야함/ %로 width 값을 지정하여 viewport에 상대적인 너비를 갖도록 한다
+        + margin도 %로 지정 + float: left;를 지정하여 2열로 정렬되도록 한다.
+      
+    23. 플렉스 박스 레이아웃 
+      23-1) Flexbox는 모던 웹을 위하여 제안된 기존 레이아웃보다 더 세련된 방식의 니즈에 부합하기 위한 CSS3의 새로운 레이아웃 방식
+        - 장점 : 1줄의 코드 추가로 수평 정렬이 가능/ 요소의 상하좌우 정렬, 순서 변경이 간단함/ 요소간 간격 조절이 간단/ 서로 다른 height를 갖는 요소의 수평정렬 때에 간단히 상하중앙 정렬이 가능함
+      23-2) Usage : Flexbox 레이아웃은 flex item이라 불리는 복수의 자식 요소와 이들을 내포하는 flex-container 부모 요소로 구성된다. / flexbox를 사용하기 위해서 HTML 부모 요소의 display 속성에 flex를 지정해야한다
+        부모 요소가 inline 요소인 경우 inline-flex을 지정한다.
+      23-3) Flexbox container 속성
+        - flex-direction : flex 컨테이너의 주축 방향을 설정 
+            flex-direction: row; 좌에서 우로(ltr) 수평 배치 (기본값)
+            flex-direction: row-reverse; 우에서 좌로(rtl) 수평 배치
+            flex-direction: column; 위에서 아래로 수직 배치
+            flex-direction: column-reverse; 아래에서 위로 수직 배치
+        - flex-wrap : flex 컨테이너의 복수 flex item을 1행으로 또는 복수행으로 배치함 
+            flex-wrap: nowrap; flex item을 개행하지 않고 1행에 배치 (기본값)
+            flex-wrap: wrap; flex item들의 width의 합계가 flex 컨테이너의 width보다 큰 경우 flex item을 복수행에 배치한다/ 기본적으로 좌에서 우, 위에서 아래로 배치됨
+            flex-wrap: wrap-reverse; 아래에서 위
+        - flex-flow : shorthand/ 기본값은 row nowrap
+        - justify-content : main axis를 기준으로 flex item을 수평 정렬
+            justify-content: flex-start; main start(좌측)를 기준으로 정렬 (기본값)
+            justify-content: flex-end; main end(우측)를 기준으로 정렬
+            justify-content: center; flex container의 중앙에 정렬
+            justify-content: space-between; 첫번째와 마지막 flex item은 좌우 측면에 정렬되고 나머지와 균등한 간격으로 정렬
+            justify-content: space-around; 균등한 간격
+        - align-items : flex container의 수직 방향(cross axis)으로 정렬
+            align-items: stretch; flex container의 높이(cross start에서 cross end까지의 높이)에 꽉찬 높이를 갖는다. (기본값)
+            align-items: flex-start; cross start 기준으로 정렬
+            align-items: flex-end; cross end 기준
+            align-items: center; cross axis의 중앙
+            align-items: baseline; baseline을 기준으로 정렬
 
+      24. 수평/ 수직 중앙 정렬
+        24-1) 수평정렬 
+          - inline/inline-block 요소 : 정렬 대상 요소의 부모 요소에 text-align: center;를 지정
+          - block 요소 : 너비를 명시적으로 지정하고 margin-right와 margin-left 프로퍼티에 auto를 지정
+          - 복수의 block 요소 : 기본적으로 수직정렬됨/ 이것을 수평정렬하기 위해서는 정렬 대상 block 요소를 inline-block 요소로 변경한 후 부모 요소에 text-align: center;를 지정
+          - Flexbox
+        24-2) 수직 정렬
+          - inline/inline-block 요소
+            - Single line : 정렬 대상의 부모 요소에 padding-top과 padding-bottom 프로퍼티값을 동일하게 적용
+            - Multiple lines 
+            - Flexbox : vertical-align 프로퍼티를 사용하는 방법은 table 프로퍼티를 사용해야해서 번거로움/ 좀 더 간단한 방법은 flexbox를 사용하는 것
+          - block 요소
+            - 요소의 높이가 고정되어 있는 경우 : 부모 요소를 기준으로 절대 위치를 지정
+            - 요소의 높이가 불확정 상태의 경우 : 부모 요소를 기준으로 절대 위치를 지정
+            - Flexbox : 부모 요소에 Flexbox layout을 지정
+        24-3) 수평/수직 정렬 : 요소의 너비와 높이가 고정되어 있는 경우, 요소의 너비와 높이가 불확정 상태의 경우 모두 사용 가능한 방법
 
-
+      25. image요소 아래에 패딩된 여분의 공간 제거하기 
+        컨테이너 요소로 img 요소를 래핑하면 img 요소 아래에 의도하지 않은 여분의 공간이 패딩됨. -> image 요소는 inline 요소로 image 요소는 텍스트로 취급된다. = 타이포그래피를 따른다 
+        해결방법1) image 요소를 블록 요소로 전환하면 더 이상 텍스트로 취급되지 않는다. -> image 요소를 블록 요소로 전환할 수 없는 레이아웃에서는 사용할 수 없음
+        해결방법2) inline 요소에 사용할 수 있는 vertical-align 프로퍼티를 사용하는 방법/ vertical-align 프로퍼티의 기본값은 baseline인데 이를 변경하여 이미지 표시 위치를 조정하는 것
 
 -->
 

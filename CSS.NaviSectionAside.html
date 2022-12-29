@@ -4,8 +4,116 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <style>
+        /* Media Query 
+        for Desktop: 801px ~ 
+        for tablet: ~ 800px 
+        for smartphone: ~ 480px
+        */
+        /*화면 크기가 800px 이하인 디바이스(태블릿)를 위한 정의*/
+        @media screen and (max-width: 800px) {
+
+            /* 데스크탑 layout에서 화면이 작아질 때 header navigation bar가 header 영역 아래로 내려오는 현상이 발생되는 것을 보안하기 위해 태블릿에서의 layout을 정의
+        -> viewport width가 800px 이하가 되면 header 영역을 2단(logo와 navigation bar영역)으로 구분하기 위하여 header 영역의 높이를 현재(60px)의 2배로 넓힌다. 그리고 logo image과 navigation bar를 centering한다.*/
+            header {
+                height: 120px;
+                text-align: center;
+            }
+
+            nav {
+                /*logo image과 navigation bar를 상단과 하단으로 분리 배치하기 위해 navigation bar의 float: right; 프로퍼티를 해제한다 -> navigation bar는 block 프로퍼티를 가지게 되어 logo image의 아래 영역으로 내려가게 됨 */
+                float: none;
+                margin-right: 0;
+            }
+
+            #wrap {
+                /* margin-top = header height 
+                aside, section영역도 header의 height만큼 내려가야 한다.*/
+                margin-top: 120px;
+            }
+
+            aside {
+                top: 120px;
+            }
+
+            /*800px 이하로 화면이 작아지면 2열 배치되어 있던 article을 1열로 배치 변경한다 */
+            article {
+                width: inherit;
+                display: block;
+                margin: 10px;
+                float: none;
+            }
+
+            article:nth-of-type(2n) {
+                margin: 10px;
+            }
+
+            article:nth-of-type(n+2) {
+                margin-top: 0;
+            }
+        }
+
+        /*화면 크기가 480px 이하인 디바이스(스마트폰)를 위한 정의*/
+        @media screen and (max-width: 480px) {
+            header {
+                height: 60px;
+            }
+
+            .nav-items {
+                display: none;
+            }
+
+            .navicon {
+                display: block;
+            }
+
+            #wrap {
+                /* margin-top = header height */
+                margin-top: 60px;
+            }
+            /*고정 배치되어 있던 aside를 article 위로 올려 배치*/
+            aside {
+                top: 60px;
+                position: static;
+                width: 100%;
+                padding: 5px 0;
+            }
+
+            /* aside navigation */
+            aside>ul {
+                width: 100%;
+            }
+
+            aside>h1 {
+                padding: 5px 0 10px 20px;
+                color: #fff;
+            }
+
+            section {
+                float: none;
+                margin-left: 0;
+            }
+
+            /* View navigation item */
+            .nav-toggle:checked~.nav-items {
+                display: block;
+                width: 100%;
+                background-color: #fff;
+                box-shadow: 0 2px 2px rgba(0, 0, 0, 0.05), 0 1px 0 rgba(0, 0, 0, 0.05);
+            }
+
+            .nav-items>li {
+                display: block;
+            }
+
+            .nav-items>li>a {
+                line-height: 50px;
+            }
+
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -19,6 +127,7 @@
             background-color: #f0f3f4;
             -webkit-font-smoothing: antialiased;
             -webkit-text-size-adjus: 100%;
+            /* 아이폰 폰트사이즈 변경 방지 */
         }
 
         li {
@@ -101,6 +210,65 @@
             color: rgba(0, 0, 0, 0.8);
         }
 
+        .navicon {
+            cursor: pointer;
+            height: 60px;
+            padding: 28px 15px;
+            /* header 우측의 절대 위치에 배치되어야 하므로 position: absolute; 지정*/
+            position: absolute;
+            top: 0;
+            right: 0;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* nav icon의 내부 작은 막대 */
+        .navicon-bar {
+            background-color: #333;
+            display: block;
+            position: relative;
+            transition: background-color .2s ease-out;
+            width: 20px;
+            height: 3px;
+        }
+
+        /*가상 요소 선택자를 사용하여 navigation icon의 내부 막대 앞뒤 공간에 내부 막대를 추가*/
+        .navicon-bar::before,
+        .navicon-bar::after {
+            background-color: #333;
+            content: "";
+            display: block;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            transition: all .2s ease-out;
+        }
+
+        .navicon-bar::before {
+            top: -7px;
+        }
+
+        .navicon-bar::after {
+            top: 7px;
+        }
+
+        /* navi 아이콘 토글하기 */
+        .nav-toggle:checked~.navicon>.navicon-bar {
+            background: transparent;
+        }
+
+        .nav-toggle:checked~.navicon>.navicon-bar::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .nav-toggle:checked~.navicon>.navicon-bar::after {
+            transform: rotate(-45deg);
+            top: 0;
+        }
+
         #content-wrap:after {
             content: "";
             display: block;
@@ -114,7 +282,6 @@
             top: 60px;
             bottom: 0;
             width: 200px;
-
             padding-top: 25px;
             background-color: #333;
         }
@@ -141,7 +308,7 @@
             padding: 20px 0 20px 20px;
             color: #fff;
         }
- 
+
         section {
             /*section 영역의 % width도 삭제하여 aside 영역 만큼 우측으로 밀어서 나머지 영역을 모두 차지하도록 한다.*/
             float: right;
@@ -149,32 +316,42 @@
         }
 
         article {
-            margin: 10px;
+            /*article 2열로 배치하기*/
+            width: 48.5%;
+            margin: 1%;
             padding: 25px;
             background-color: white;
+            float: left;
         }
 
-        footer {
-            position: absolute;
-            height: 60px;
-            width: 100%;
-            padding: 0 25px;
-            line-height: 60px;
-            color: #8a8c8f;
-            border-top: 1px solid #dee5e7;
-            background-color: #f2f2f2;
+        article:nth-of-type(2n) {
+            margin-left: 0;
+        }
+
+        article:nth-of-type(n+3) {
+            margin-top: 0;
         }
 
         footer {
             /* footer를 aside위에 올리기 위해 사용(부유객체) */
             position: absolute;
-            height: 60px;
+            left: 0;
+            bottom: 0;
             width: 100%;
+            height: 60px;
             padding: 0 25px;
             line-height: 60px;
             color: #8a8c8f;
             border-top: 1px solid #dee5e7;
             background-color: #f2f2f2;
+        }
+
+        .nav-toggle {
+            display: none;
+        }
+
+        .navicon {
+            display: none;
         }
     </style>
 </head>
@@ -184,6 +361,10 @@
         <header>
             <a class="logo" href="#home"><img src="https://poiemaweb.com/img/logo.png"></a>
             <nav>
+                <input class="nav-toggle" id="nav-toggle" type="checkbox">
+                <!-- navigation icon은 input checkbox 요소와 연동되어야 하므로 label 요소를 사용하였다.
+                     = navigation icon을 클릭하면 checkbox input tag도 checked 상태가 된다. -->
+                <label class="navicon" for="nav-toggle"><span class="navicon-bar"></span></label>
                 <ul class="nav-items">
                     <li><a href="#home">Home</a></li>
                     <li><a href="#news">News</a></li>
@@ -240,7 +421,7 @@
                     <p>Standing on the River Thames, London has been a major settlement for two millennia,its history
                         going back to its founding by the Romans, who named it Londinium.</p>
                 </article>
-                
+
                 <article id="newyork">
                     <h1>Newyork</h1>
                     <p>London is the capital city of England. It is the most populous city in the United Kingdom, with a
