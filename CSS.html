@@ -1,4 +1,5 @@
-<!-- html은 정보와 구조화, css 는 styling  
+<!-- 
+html은 정보와 구조화, css 는 styling  
 1. 선택자 selector : 스타일을 적용하고자 하는  html 요소 
     - 프로퍼티 : 값;
 
@@ -444,9 +445,9 @@
       25. image요소 아래에 패딩된 여분의 공간 제거하기 
         컨테이너 요소로 img 요소를 래핑하면 img 요소 아래에 의도하지 않은 여분의 공간이 패딩됨. -> image 요소는 inline 요소로 image 요소는 텍스트로 취급된다. = 타이포그래피를 따른다 
         해결방법1) image 요소를 블록 요소로 전환하면 더 이상 텍스트로 취급되지 않는다. -> image 요소를 블록 요소로 전환할 수 없는 레이아웃에서는 사용할 수 없음
-        해결방법2) inline 요소에 사용할 수 있는 vertical-align 프로퍼티를 사용하는 방법/ vertical-align 프로퍼티의 기본값은 baseline인데 이를 변경하여 이미지 표시 위치를 조정하는 것
+        해결방법2) inline 요소에 사용할 수 있는 vertical-align 프로퍼티를 사용하는 방법/ vertical-align 프로퍼티의 기본값은 baseline인데 이를 변경하여 이미지 표시 위치를 조정하는 것 -->
 
--->
+
 
 <!DOCTYPE html>
 <html>
@@ -1162,8 +1163,6 @@
 
       /*from, to 키워드 대신 %를 사용 가능*/
     }
-
-    
   </style>
 </head>
 
@@ -1185,7 +1184,6 @@
   <p class="text-center text-large text-blue">Center Large Blue (클래스 3개) </p>
 
   <a href="http://www.poiemaweb.com">poiemaweb.com</a><br>
-  <a href="http://www.google.com" target="_blank">google.com</a><br>
   <a href="https://www.naver.com" target="_top">naver.com</a>
 
   <h1 title="heading first">Heading first</h1>
@@ -1245,20 +1243,21 @@
   <input type="text" placeholder="focus me">
   <br>
 
-  <a href="#" target="_blank">This is a link</a><br>
-  <input type="text" value="I'll be red when focused"><br>
-  <input type="password" value="I'll be red when focused">
-  <hr>
+  <label>
+    <a href="#" target="_blank">This is a link</a><br>
+    <input type="text" value="I'll be red when focused"><br>
+    <input type="password" value="I'll be red when focused">
+    <hr>
 
-  <input type="radio" checked="checked" value="male" name="gender"> <span>Male</span><br>
-  <input type="radio" value="female" name="gender"> <span>Female</span><br>
-  <input type="radio" value="neuter" name="gender" disabled> <span>Neuter</span>
-  <hr>
+    <input type="radio" checked="checked" value="male" name="gender"> <span>Male</span><br>
+    <input type="radio" value="female" name="gender"> <span>Female</span><br>
+    <input type="radio" value="neuter" name="gender" disabled> <span>Neuter</span>
+    <hr>
 
-  <input type="checkbox" checked="checked" value="bicycle"> <span>I have a bicycle</span><br>
-  <input type="checkbox" value="car"> <span>I have a car</span><br>
-  <input type="checkbox" value="motorcycle" disabled> <span>I have a motorcycle</span>
-
+    <input type="checkbox" checked="checked" value="bicycle"> <span>I have a bicycle</span><br>
+    <input type="checkbox" value="car"> <span>I have a car</span><br>
+    <input type="checkbox" value="motorcycle" disabled> <span>I have a motorcycle</span>
+  </label>
   <p>This paragraph is the first child of its parent (body). p요소 중 첫번째 자식 요소</p>
 
   <h1>Welcome to My Homepage</h1>
@@ -1299,10 +1298,11 @@
     <p>The third paragraph.</p>
     <p>The fourth paragraph.</p>
   </div>
-
-  <input type="text" value="Text input">
-  <input type="email" value="email input">
-  <input type="password" value="Password input">
+  <label>
+    <input type="text" value="Text input">
+    <input type="email" value="email input">
+    <input type="password" value="Password input">
+  </label>
   <hr>
 
   <label>입력값이 반드시 필요
@@ -1405,8 +1405,7 @@
   <div class="absolute-box red"></div>
   <div class="absolute-box green"></div>
   <div class="absolute-box blue"></div>
-
-  <img src="https://poiemaweb.com/img/doug.jpg">
+  <img src="https://poiemaweb.com/img/doug.jpg" alt="img">
   <div>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
     magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
     consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
