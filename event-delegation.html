@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event delegation 이벤트 위임</title>
+</head>
+
+<body>
+    <ul id="post-list">
+        <li id="post-1">Item 1</li>
+        <li id="post-2">Item 2</li>
+        <li id="post-3">Item 3</li>
+        <li id="post-4">Item 4</li>
+        <li id="post-5">Item 5</li>
+        <li id="post-6">Item 6</li>
+    </ul>
+    <!-- 모든 li 요소가 클릭 이벤트에 반응하는 처리를 구현하고 싶은 경우, li 요소에 이벤트 핸들러를 바인딩하면 총 6개의 이벤트 핸들러를 바인딩하여야 한다. -->
+    <script>
+        function printId() {
+            console.log(this.id);
+        }
+
+        document.querySelector('#post-1').addEventListener('click', printId);
+        document.querySelector('#post-2').addEventListener('click', printId);
+        document.querySelector('#post-3').addEventListener('click', printId);
+        document.querySelector('#post-4').addEventListener('click', printId);
+        document.querySelector('#post-5').addEventListener('click', printId);
+        document.querySelector('#post-6').addEventListener('click', printId);
+    </script>
+    <!-- 만일 li 요소가 100개라면 100개의 이벤트 핸들러를 바인딩하여야 한다. 이는 실행 속도 저하의 원인이 될 뿐 아니라 코드 또한 매우 길어지며 작성 또한 불편하다.
+그리고 동적으로 li 요소가 추가되는 경우, 아직 추가되지 않은 요소는 DOM에 존재하지 않으므로 이벤트 핸들러를 바인딩할 수 없다. 
+-> 이러한 경우 이벤트 위임을 사용한다. -->
+
+    <!-- 이벤트위임 -->
+    <script>
+        const msg = document.querySelector('.msg');
+        const list = document.querySelector('.post-list')
+
+        list.addEventListener('click', function (e) {
+            // 이벤트를 발생시킨 요소
+            console.log('[target]: ' + e.target);
+            // 이벤트를 발생시킨 요소의 nodeName
+            console.log('[target.nodeName]: ' + e.target.nodeName);
+
+            // li 요소 이외의 요소에서 발생한 이벤트는 대응하지 않는다.
+            if (e.target && e.target.nodeName === 'LI') {
+                msg.innerHTML = 'li#' + e.target.id + ' was clicked!';
+            }
+        });
+    </script>
+
+
+
+</body>
+
+</html>
