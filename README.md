@@ -10,6 +10,7 @@
 
 ## 이벤트 핸들러
 
+
 이벤트에 반응하려면 이벤트가 발생했을 때 실행되는 함수인 핸들러(handler) 를 할당해야한다.
 
 1. HTML 속성
@@ -35,6 +36,7 @@ HTML안의 `on<event>` 속성에 핸들러를 할당할 수 있다. `input`태�
 ```
 
 HTML 속성은 대·소문자를 구분하지 않기 때문에, `ONCLICK`은 `onClick`이나 `onCLICK`과 동일하게 작동한다. 하지만 속성값은 대개 `onclick` 같이 소문자로 작성한다.
+
 
 2. DOM 프로퍼티
 
@@ -62,6 +64,7 @@ DOM프로퍼티 `on<event>`를 사용해도 핸들러를 할당할 수 있다.
 
 핸들러를 제거하고 싶다면 `elem.onclick = null` 같이 null을 할당하면 된다.
 
+
 3. this로 요소에 접근하기
 
 핸들러 내부에 쓰인 `this`의 값은 핸들러가 할당된 요소이다. 아래 예시의 `this.innerHTML`에서 `this`는 `button`이므로 버튼을 클릭하면 버튼 안의 콘텐츠가 얼럿창에 출력된다.
@@ -69,6 +72,7 @@ DOM프로퍼티 `on<event>`를 사용해도 핸들러를 할당할 수 있다.
 ```html
 <button onclick="alert(this.innerHTML)">클릭해 주세요.</button>
 ```
+
 
 ### 자주하는 실수
 
@@ -107,6 +111,7 @@ button.onclick = function() {
 };
 ```
 
+
 2. `setAttribute`로 핸들러를 할당하지 말 것
 
 아래 코드는 동작하지 않는다
@@ -117,9 +122,11 @@ button.onclick = function() {
 document.body.setAttribute('onclick', function() { alert(1) });
 ```
 
+
 3. DOM 프로퍼티는 대·소문자를 구분한다.
 
 핸들러 할당 시 `elem.onclick`은 괜찮지만, `elem.ONCLICK`은 안된다
+
 
 ## addEventListener
 
@@ -133,12 +140,12 @@ input.onclick = function() { alert(2); } // 이전 핸들러를 덮어씀
 
 `addEventListener` 와 `removeEventListener` 라는 특별한 메서드를 이용해 핸들러를 관리하면 핸들러를 여러개 할당할 수 있다.
 
-- 문법
+1. 문법
 
 ```js
 element.addEventListener(event, handler, [options]);
 ```
 
-    - event : 이벤트 이름(예: "click")
-    - handler : 핸들러 함수
-    - options : 아래 프로퍼티를 갖는 객체
+- event : 이벤트 이름(예: "click")
+- handler : 핸들러 함수
+- options : 아래 프로퍼티를 갖는 객체
