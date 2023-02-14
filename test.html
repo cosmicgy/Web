@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 
 <head>
   <meta charset="UTF-8">
@@ -10,13 +10,13 @@
 </head>
 
 <body>
-  <p>p 태그</p>
-  <div>div 태그</div>
-
   <script>
-    alert( document.body.innerHTML ); // 내용 읽기
-    document.body.innerHTML = '새로운 BODY!'; // 교체
+    let name = 'world';
   </script>
+  <h1>Hello {name}!</h1>
+  <button on:click={() => { name = "jinho" }}>
+    Change!
+  </button>
 
 </body>
 
