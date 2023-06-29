@@ -34,6 +34,19 @@ IOC는 DI와 DL의 의해 구현된다.
 
 의존성 주입이란 객체가 서로 의존하는 관계가 되게 의존성을 주입하는 것이다. 객체지향 프로그램에서 의존성 이란 하나의 객체가 어떠한 다른 객체를 사용하고 있음을 의미한다. IOC에서의 DI는 각 클래스 사이에 필요로 하는 의존관계를 빈 설정 정보를 바탕으로 컨테이너가 자동으로 연결해 주는 것이다.
 
+```java
+//seter injection
+B b = new B(); //dependency
+A a = new A();
+
+a.setB(b);// injection
+
+//construction injection
+B b = new B();
+A a = new A(b);
+
+```
+
 
 ## Spring Framework의 특징
 
