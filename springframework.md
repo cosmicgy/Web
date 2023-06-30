@@ -21,6 +21,15 @@ Inversion of Control의 약자 = 제어의 역전
 
 하지만 IOC에서의 객체는 자기가 사용할 객체를 선택하거나 생성하지 않는다. 자신의 모든 권한을 다른 대상에 위임함으로 써 제어권한을 위임받은 특별한 객체에 의해 결정되고 만들어진다.
 
+### Spring IOC 컨테이너 사용하기 (ApplicationContext 이용하기)
+
+```java
+ApplicationContext context = new ClassPathXmlApplicationContext("spring/di/setting.xml");
+ExamConsole console = (ExamConsole) context.getBean("console");
+// getBean으로 꺼내올 때 캐스팅 해야함 object로 가져오기 때문.
+ExamConsole console = context.getBean(ExamConsole.class); //선호되는 방법
+console.print();
+```
 
 ### IOC 의 구성요소 DI와 DL
 
