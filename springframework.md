@@ -148,6 +148,24 @@ private Exam exam;
 
 단, setting.xml파일에 context namespaces 체크한뒤 `<context:annotation-config />` 추가해야함
 
+- @Qualifier
+
+Autowired가 무엇을 기준으로 injection 해주는지 명시
+
+```xml
+<bean id="exam1" class="srping.di.entity.NewLecExam" p:kor="10" p:eng="10" />
+<bean id="exam2" class="srping.di.entity.NewLecExam" p:kor="20" p:eng="20" />
+```
+
+```java
+@Autowired
+@Qualifier("exam1")
+@Override
+public void setExam(Exam exam)
+    this.exam = exam;
+```
+
+
 ## Spring Framework의 특징
 
 ### POJO
