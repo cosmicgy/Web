@@ -200,6 +200,47 @@ public class NewlecExam implements Exam {
 
 - @Service, @Controller, @Repository 모두 @Component 와 동일하게 사용 가능하나, 객체화하는 클래스가 어떤 역할을 하는 클래스인지 명시 가능
 
+
+## XML Configuration을 Java Configuration으로 변경
+
+설정을 위한 java class임을 명시하기 위해 `@COnfiguration` 을 사용
+
+```xml
+<context:conponent-scan base-package="spring.di.ui" />
+<bean id="exam" class="spring.di.entity.NewlecExam" />
+```
+을 아래와 같이 자바 클래스로 변환
+
+```java
+// NewlecAppConfig.java
+@ComponentScan("spring.di.ui")
+@Configuration
+public class NewlecAppConfig{
+    @Bean
+    public Exam exam() { //여기서의 exam은 함수명이 아닌 contatiner에 담겨질 때의 이름으로 보는 것이 맞다. xml파일에서의 bean id
+        return new NewlecExam();
+    }
+
+}
+```
+
+```java
+// Program.java
+// ApplicationContext context = new ClassPathXmlApplicationContext("spring/di/setting.xml")
+ApplicationContext context = new AnnotationConfigApplicationContext(NewlecAppConfig.class);
+```
+
+- register 함수
+여러개의 config.class를 설정하거나 분리해서 설정할 수 있음
+
+```java
+AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext();
+ctx.register(NewlecAppConfig.class);
+// ctx.register(AppConfig.class, OtherConfig.class) 이렇게 쉼표로 구분해서 여러개 사용 가능
+ctx.refresh();
+```
+
+
 ## Spring Framework의 특징
 
 ### POJO
