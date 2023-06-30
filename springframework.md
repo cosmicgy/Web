@@ -181,6 +181,25 @@ public void setExam(Exam exam)
 
 두개의 패키지를 스캔하도록 할 때에는 `<context:component-scan base-pakage="spring.di.ui, spring.di.entity" />`처럼 콤마 찍어서 입력.
 
+- @Value
+
+기본값 설정을 위한 어노테이션. 객체에 값을 설정하지 않아도 기본 값을 갖고 객체 생성.
+
+```java
+@Component
+public class NewlecExam implements Exam {
+    @Value("10")
+    private int kor;
+    @Vlaue("20")
+    private int eng;
+    private int math;
+    private int com;
+}
+// kor = 10, eng = 20
+```
+
+- @Service, @Controller, @Repository 모두 @Component 와 동일하게 사용 가능하나, 객체화하는 클래스가 어떤 역할을 하는 클래스인지 명시 가능
+
 ## Spring Framework의 특징
 
 ### POJO
