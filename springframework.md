@@ -94,7 +94,6 @@ property 대신 constructor-arg 를 사용하면 됨. index 속성으로 순서 
 ```
 
 
-
 ## Spring Framework의 특징
 
 ### POJO
