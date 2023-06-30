@@ -93,6 +93,42 @@ property 대신 constructor-arg 를 사용하면 됨. index 속성으로 순서 
 <bean id="exam" class="spring.di.entity.NewLecExam" p:kor="10" p:eng="20" />
 ```
 
+##### 콜렉션 생성과 목록 DI
+
+```java
+List<Exam> exams = new ArrayList<>();
+exams.add(new NewLecExam(1,1,1,1));
+
+for (Exam e : exams)
+    System.out.println(e);
+```
+
+를 아래와 같이 변경.
+
+```xml
+<bean id="exams" class="java.util.ArrayList" />
+    <constructor-arg>
+        <list>
+            <bean class="spring.di.entity.NewLecExam" p:kor="10" p:eng="20" />
+            <ref bean="exam" />
+        </list>
+    </constructor-arg>
+```
+
+```xml
+<util:list id="exams" list-class="java.util.ArrayList">
+    <bean class="srping.di.entity.NewLecExam" p:kor="10" p:eng="20" />
+    <ref bean="exam" />
+</util:list>
+```
+
+```java
+List<Exam> exams = (List<Exam>) context.getBean("exams");
+
+for (Exam e : exams)
+    System.out.println(e);
+```
+
 
 ## Spring Framework의 특징
 
