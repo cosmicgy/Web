@@ -174,6 +174,12 @@ public void setExam(Exam exam)
     this.exam = exam;
 ```
 
+- @Component
+
+어노테이션을 이용한 객체 생성 방법. setting.xml 파일에서  `<context:component-scan base-pakage="spring.di.ui"/>` 입력해주어야 사용가능.
+`<context:annotation-config />`는 삭제해도 됨. 그리고 `@Component("console")` 이렇게 객체 생성 시 이름을 부여할 수 있다.
+
+두개의 패키지를 스캔하도록 할 때에는 `<context:component-scan base-pakage="spring.di.ui, spring.di.entity" />`처럼 콤마 찍어서 입력.
 
 ## Spring Framework의 특징
 
