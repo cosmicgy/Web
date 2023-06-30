@@ -69,6 +69,31 @@ A a = new A(b);
 
 ```
 
+- 값 형식 DI
+
+```xml
+<bean id="exam" class="spring.di.entity.NewLecExam">
+    <property name="kor" value="10" />
+</bean>
+```
+
+- 생성자 DI
+property 대신 constructor-arg 를 사용하면 됨. index 속성으로 순서 지정 가능. 동일하게 name 사용 가능.
+
+```xml
+<bean id="exam" class="spring.di.entity.NewLecExam">
+    <constructor-arg index="0" value="10" />
+    <constructor-arg index="1" value="20" />
+</bean>
+```
+
+<!-- namespaces 처리기에서 p 에 체크 실행하면 사용 가능
+동일 문서에 bean 이 2개 이상 있을 수 있음. 각자 본인이 처리할 내용이 다를 수 있음 -->
+```xml
+<bean id="exam" class="spring.di.entity.NewLecExam" p:kor="10" p:eng="20" />
+```
+
+
 
 ## Spring Framework의 특징
 
