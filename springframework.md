@@ -30,6 +30,19 @@ IOC는 DI와 DL의 의해 구현된다.
 
 컨테이너에서는 객체들을 관리하기 위해 별도의 저장소에 빈을 저장하는데 이때 컨테이너에서 제공하는 api를 이용하여 사용하고자 하는 빈을 검색하는 방법을 말한다.
 
+- setting.xml 에 bean태그 사용해서 지시하는 방법 (지시서 작성)
+
+```xml
+<!-- Exam exam = new NewlecExam();을 setting.xml 파일에서 아래와같이 작성하면 된다
+패키지명도 같이 써줘야함 class에-->
+<bean id ="exam" class="spring.di.entity.NewLecExam" />
+<bean id="console" class="spring.di.ui.GridExamConsole">
+<!-- console.setExam(exam); 아래와 같이 property 태그를 사용해 작성하면 된다.
+setExam 에서 set을 생략하고 Exam 의 E를 소문자로 바꿔준다 -->
+    <property name="exam" ref ="exam" />
+</bean>
+```
+
 #### DI(Dependency Injection) - 의존성 주입
 
 의존성 주입이란 객체가 서로 의존하는 관계가 되게 의존성을 주입하는 것이다. 객체지향 프로그램에서 의존성 이란 하나의 객체가 어떠한 다른 객체를 사용하고 있음을 의미한다. IOC에서의 DI는 각 클래스 사이에 필요로 하는 의존관계를 빈 설정 정보를 바탕으로 컨테이너가 자동으로 연결해 주는 것이다.
