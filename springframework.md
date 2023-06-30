@@ -146,6 +146,15 @@ for (Exam e : exams)
 private Exam exam;
 ```
 
+required 속성의 사용 가능. settins 에 객체가 없어도 null 로 진행됨.
+
+
+```java
+@Autowired(reuqired=false)
+@Qualifier("exam2")
+private Exam exam;
+```
+
 단, setting.xml파일에 context namespaces 체크한뒤 `<context:annotation-config />` 추가해야함
 
 - @Qualifier
