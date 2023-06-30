@@ -258,6 +258,13 @@ AOP에서는 핵심기능과 공통기능을 분리시켜 핵심 로직에 영�
 로그처리, 보안처리, 트랜잭션 처리와 같은 core concern 이 아닌 업무를 cross-cutting concern이라 하고 이를 따로 모아 작성.
 -> 스프링을 사용하면 AOP 쉽게 구현 가능
 
+```
+(java) proxy 클래스에 의해 구현되는 cross-cutting concern
+ex) int total = proxy.total();
+float avg = proxy.avg();
+```
+
+
 ### MVC (Model2)
 
 MVC란 (Model View Controller) 구조로 사용자 인터페이스와 비지니스 로직을 분리하여 개발 하는 것이다. MVC에서는 Model1과 Model2로 나누어져 있으며 일반적인 MVC는 Model2를 지칭한다.
