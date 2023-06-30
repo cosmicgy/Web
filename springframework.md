@@ -130,6 +130,24 @@ for (Exam e : exams)
 ```
 
 
+### 어노테이션
+
+어노테이션을 이용해서 설정을 코드와 함께 가져가는 방법. 요즘에 많이 사용됨.
+
+- @Autowired
+
+```xml
+<property name="exam" ref="exam" />
+```
+을 xml 파일에 작성할 필요없이 java 코드에 아래와같이 작성.
+
+```java
+@Autowired
+private Exam exam;
+```
+
+단, setting.xml파일에 context namespaces 체크한뒤 `<context:annotation-config />` 추가해야함
+
 ## Spring Framework의 특징
 
 ### POJO
